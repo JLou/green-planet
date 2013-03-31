@@ -9,3 +9,5 @@
 # Netbeans bullshit
 *.xml
 *.properties
+/build/
+/dist/
