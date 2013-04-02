@@ -32,6 +32,16 @@ public class Turn
     {
         return _players;
     }
+    
+    public Player getPlayer(String name)
+    {
+        for(Player p : _players)
+        {
+            if(p.getName().equals(name))
+                return p;
+        }
+        return null;
+    }
     public Turn(Game g)
     {
         _players = (ArrayList<Player>) g.getPlayers().clone();
