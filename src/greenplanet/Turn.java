@@ -37,10 +37,11 @@ public class Turn
     {
         for(Player p : _players)
         {
+            System.out.println("Playername:" + name + " reading "+p.getName());
             if(p.getName().equals(name))
                 return p;
         }
-        return null;
+        return _players.get(_players.size()-1);
     }
     public Turn(Game g)
     {

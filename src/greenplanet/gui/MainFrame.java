@@ -48,6 +48,11 @@ public class MainFrame extends JFrame
         ChartPanel cp = bars.getPanel();
         cp.setPreferredSize(new Dimension(500,270));
         add(cp);
+        
+        PiePlayerEnergy pie = new PiePlayerEnergy(gh.getCurrentTurn(), "Galioadd");
+        
+        add(pie.getPanel());
         validate();
+        
     }
 }
