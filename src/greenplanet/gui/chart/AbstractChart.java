@@ -7,7 +7,6 @@ package greenplanet.gui.chart;
 import greenplanet.Turn;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
-import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.general.Dataset;
 
 /**

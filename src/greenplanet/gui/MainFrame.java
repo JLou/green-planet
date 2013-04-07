@@ -32,15 +32,15 @@ public class MainFrame extends JFrame
         add(bars.getPanel());*/
 
         FlowLayout layout = new FlowLayout();
-        Button b = new Button("Play");        
+//        Button b = new Button("Play");        
         setLayout(layout);
-        add(b);
+        
+        add(new StartPanel(this));
+//        add(b);
     }
     
     public void update(GameHistory gh)
-    {
-        
-        
+    {                
         Turn t = gh.getCurrentTurn();
         GameEnergyRepartition bars = new GameEnergyRepartition(t);
         
