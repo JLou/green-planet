@@ -30,6 +30,10 @@ public enum BuildingInfo
     private int _waterDependency;
     
     private String _name;
+    
+    
+    private static BuildingInfo[] _values = null;
+    
     private BuildingInfo(int cost, int bonus, int prod, int solarDependency,
                       int windDependency, int waterDependency,
                       String name)
@@ -61,6 +65,13 @@ public enum BuildingInfo
     /**
      * @return the _cost
      */
+    
+    public static BuildingInfo[] getValues()
+    {
+        if(_values == null)
+            _values = new BuildingInfo[] { NUCLEAR, WATER, WIND, SUN, COAL };
+        return _values;
+    }
     public int getCost() {
         return _cost;
     }

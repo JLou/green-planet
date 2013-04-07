@@ -4,15 +4,21 @@
  */
 package greenplanet.gui.chart;
 
+import greenplanet.BuildingInfo;
 import greenplanet.Turn;
+import greenplanet.data.BuildingArray;
+import greenplanet.data.PlayerInfo;
 import greenplanetclient.Building;
 import greenplanetclient.Player;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
+import sun.security.provider.certpath.BuildStep;
 
 /**
  *
@@ -30,7 +36,7 @@ public final class PiePlayerEnergy extends AbstractChart
         super(t);
         _playername = playername;
         dataset = createDataset();
-        chart = ChartFactory.createPieChart("Energy Repartition", dataset, true, true, Locale.FRENCH);
+        chart = ChartFactory.createPieChart("Energy Repartition of Player " + playername, dataset, true, true, Locale.FRENCH);
     }
     
     @Override
@@ -45,33 +51,21 @@ public final class PiePlayerEnergy extends AbstractChart
         
         Player p = _turn.getPlayer(_playername);
         
-        int[] buildings = new int[5];
-        for(Building b : p.getBuildings())
+        PlayerInfo pi = new PlayerInfo(p);
+        
+        
+        for(BuildingInfo bi : BuildingInfo.getValues())
         {
-            switch(b.getType())
-            {
-                case "water_turbine":
-                    buildings[0]++;
-                    break;
-                case "wind_turbine":
-                    buildings[1]++;
-                    break;
-                case "solar_plant":
-                    buildings[2]++;
-                    break;
-                case "nuclear":
-                    buildings[3]++;
-                    break;
-                case "coal_fired_plant":
-                    buildings[4]++;
-                    break;                    
+            try {
+                result.setValue(bi.getName(), 
+                        (Number) pi.getProduction(
+                        BuildingArray.getIndex(bi.getName())
+                ));
+            } catch (Exception ex) {
+                System.out.println("fail" + ex);
             }
         }
         
-        for(int i = 0;i < 5; i++)
-        {
-            result.setValue(i, (Number)buildings[i]);
-        }
         
         return result;
         

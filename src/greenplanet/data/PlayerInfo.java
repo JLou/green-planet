@@ -29,4 +29,10 @@ public class PlayerInfo
             _totalEnergy = _buildingsValues.getTotal();
         return _totalEnergy;
     }
+    
+    public int getProduction(int buildingType) throws Exception
+    {
+        return _buildingsValues.getBuildingValue(buildingType);
+    }
+    
 }
