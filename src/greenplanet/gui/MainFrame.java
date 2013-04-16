@@ -1,14 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package greenplanet.gui;
 
 import greenplanet.GameHistory;
 import greenplanet.Turn;
 import greenplanet.gui.chart.GameEnergyRepartition;
 import greenplanet.gui.chart.PiePlayerEnergy;
-import java.awt.Button;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import javax.swing.JFrame;
