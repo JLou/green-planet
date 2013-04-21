@@ -5,6 +5,7 @@
 package greenplanet.gui.events;
 
 import greenplanet.GameHistory;
+import greenplanet.Greenplanet;
 import greenplanet.gui.OfflineOptionsPanel;
 import greenplanetclient.ClientException;
 import greenplanetclient.ClientInterface;
@@ -15,13 +16,11 @@ import greenplanetclient.Order;
 import greenplanetclient.Player;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.bind.JAXBException;
-import sun.org.mozilla.javascript.internal.ContextFactory;
 
 /**
  *
@@ -101,6 +100,8 @@ public class StartOfflineButtonListener extends MouseAdapter
                 }
                 game = client.giveOrder(order);
                 gh.addTurn(game);
+                
+                _panel.getDebugArea().setText(Greenplanet.boas.toString());
             }
         } catch (JAXBException | InterruptedException | IOException ex) {
             Logger.getLogger(OfflineButtonListener.class.getName()).log(Level.SEVERE, null, ex);

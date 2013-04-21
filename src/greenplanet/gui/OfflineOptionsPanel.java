@@ -1,10 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package greenplanet.gui;
 
 import greenplanet.gui.events.StartOfflineButtonListener;
+import javax.swing.JTextArea;
 
 /**
  *
@@ -21,6 +18,11 @@ public class OfflineOptionsPanel extends javax.swing.JPanel {
         
         startGameButton.addMouseListener(new StartOfflineButtonListener(this));
 
+    }
+    
+    public JTextArea getDebugArea()
+    {
+        return debugArea;
     }
 
     public String getPlayerName()
@@ -58,6 +60,8 @@ public class OfflineOptionsPanel extends javax.swing.JPanel {
         debugCheckBox = new javax.swing.JCheckBox();
         jPanel5 = new javax.swing.JPanel();
         startGameButton = new javax.swing.JButton();
+        debug = new javax.swing.JScrollPane();
+        debugArea = new javax.swing.JTextArea();
 
         setAlignmentX(1.0F);
         setAlignmentY(50.0F);
@@ -112,9 +116,9 @@ public class OfflineOptionsPanel extends javax.swing.JPanel {
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(0, 18, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(debugCheckBox)
-                .addGap(0, 19, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         add(jPanel4);
@@ -134,19 +138,29 @@ public class OfflineOptionsPanel extends javax.swing.JPanel {
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 31, Short.MAX_VALUE)
+            .addGap(0, 23, Short.MAX_VALUE)
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel5Layout.createSequentialGroup()
-                    .addGap(0, 4, Short.MAX_VALUE)
+                    .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(startGameButton)
-                    .addGap(0, 4, Short.MAX_VALUE)))
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         add(jPanel5);
+
+        debugArea.setColumns(20);
+        debugArea.setRows(5);
+        debugArea.setText("aedqsedzqdqz");
+        debugArea.setEnabled(false);
+        debug.setViewportView(debugArea);
+
+        add(debug);
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSlider botNumberSlider;
+    private javax.swing.JScrollPane debug;
+    private javax.swing.JTextArea debugArea;
     private javax.swing.JCheckBox debugCheckBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
