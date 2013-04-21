@@ -6,7 +6,9 @@ import greenplanet.gui.chart.GameEnergyRepartition;
 import greenplanet.gui.chart.PiePlayerEnergy;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import org.jfree.chart.ChartPanel;
 
 /**
@@ -15,27 +17,20 @@ import org.jfree.chart.ChartPanel;
  */
 public class MainFrame extends JFrame
 {
+    
+    JPanel current;
     public MainFrame()
     {
-        /*PiePlayerEnergy p = new PiePlayerEnergy();
-        GameEnergyRepartition bars = new GameEnergyRepartition();
-        ChartPanel chartPanel = p.getPanel();
-        // default size
-        chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
-        // add it to our application
-        add(chartPanel);
-        add(bars.getPanel());*/
-
-        FlowLayout layout = new FlowLayout();
-//        Button b = new Button("Play");        
-        setLayout(layout);
-        
-        add(new StartPanel(this));
-//        add(b);
+        BoxLayout layout = new BoxLayout(this, BoxLayout.Y_AXIS);
+        current = new StartPanel(this);
+        add(current);
+        //add(new OfflineOptionsPanel());
     }
     
     public void update(GameHistory gh)
     {                
+        remove(current);
+
         Turn t = gh.getCurrentTurn();
         GameEnergyRepartition bars = new GameEnergyRepartition(t);
         
@@ -49,5 +44,14 @@ public class MainFrame extends JFrame
         add(pie.getPanel());
         validate();
         
+    }
+    
+    public void offlineMode()
+    {
+        remove(current);
+        current = new OfflineOptionsPanel();
+        add(current);
+        validate();
+
     }
 }

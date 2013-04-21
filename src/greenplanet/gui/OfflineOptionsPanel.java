@@ -4,6 +4,8 @@
  */
 package greenplanet.gui;
 
+import greenplanet.gui.events.StartOfflineButtonListener;
+
 /**
  *
  * @author JLou
@@ -16,9 +18,26 @@ public class OfflineOptionsPanel extends javax.swing.JPanel {
     public OfflineOptionsPanel() {
         
         initComponents();
+        
+        startGameButton.addMouseListener(new StartOfflineButtonListener(this));
 
     }
 
+    public String getPlayerName()
+    {
+        return playerNameField.getText();
+    }
+    
+    public boolean isDebugActivated()
+    {
+        return debugCheckBox.isSelected();
+    }
+    
+    public int getBotNumber()
+    {
+        return botNumberSlider.getValue();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -31,12 +50,12 @@ public class OfflineOptionsPanel extends javax.swing.JPanel {
         titleLabel = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        PlayerNameField = new javax.swing.JTextField();
+        playerNameField = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jSlider1 = new javax.swing.JSlider();
+        botNumberSlider = new javax.swing.JSlider();
         jPanel4 = new javax.swing.JPanel();
-        jCheckBox2 = new javax.swing.JCheckBox();
+        debugCheckBox = new javax.swing.JCheckBox();
         jPanel5 = new javax.swing.JPanel();
         startGameButton = new javax.swing.JButton();
 
@@ -52,10 +71,10 @@ public class OfflineOptionsPanel extends javax.swing.JPanel {
         jLabel1.setText("Nom du joueur :");
         jPanel1.add(jLabel1);
 
-        PlayerNameField.setColumns(25);
-        PlayerNameField.setText("JLou");
-        PlayerNameField.setMinimumSize(new java.awt.Dimension(25, 20));
-        jPanel1.add(PlayerNameField);
+        playerNameField.setColumns(25);
+        playerNameField.setText("JLou");
+        playerNameField.setMinimumSize(new java.awt.Dimension(25, 20));
+        jPanel1.add(playerNameField);
 
         add(jPanel1);
 
@@ -64,22 +83,22 @@ public class OfflineOptionsPanel extends javax.swing.JPanel {
         jLabel2.setText("Nombre de bots :");
         jPanel3.add(jLabel2);
 
-        jSlider1.setMajorTickSpacing(1);
-        jSlider1.setMaximum(9);
-        jSlider1.setMinorTickSpacing(1);
-        jSlider1.setPaintLabels(true);
-        jSlider1.setPaintTicks(true);
-        jSlider1.setSnapToTicks(true);
-        jSlider1.setToolTipText("Bot number");
-        jSlider1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jSlider1.setMinimumSize(new java.awt.Dimension(50, 50));
-        jSlider1.setName("Nombre de Bots:"); // NOI18N
-        jSlider1.setPreferredSize(new java.awt.Dimension(200, 50));
-        jPanel3.add(jSlider1);
+        botNumberSlider.setMajorTickSpacing(1);
+        botNumberSlider.setMaximum(9);
+        botNumberSlider.setMinorTickSpacing(1);
+        botNumberSlider.setPaintLabels(true);
+        botNumberSlider.setPaintTicks(true);
+        botNumberSlider.setSnapToTicks(true);
+        botNumberSlider.setToolTipText("Bot number");
+        botNumberSlider.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        botNumberSlider.setMinimumSize(new java.awt.Dimension(50, 50));
+        botNumberSlider.setName("Nombre de Bots:"); // NOI18N
+        botNumberSlider.setPreferredSize(new java.awt.Dimension(200, 50));
+        jPanel3.add(botNumberSlider);
 
         add(jPanel3);
 
-        jCheckBox2.setText("Activer le mode debug");
+        debugCheckBox.setText("Activer le mode debug");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -87,25 +106,20 @@ public class OfflineOptionsPanel extends javax.swing.JPanel {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(0, 181, Short.MAX_VALUE)
-                .addComponent(jCheckBox2)
+                .addComponent(debugCheckBox)
                 .addGap(0, 182, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(0, 18, Short.MAX_VALUE)
-                .addComponent(jCheckBox2)
+                .addComponent(debugCheckBox)
                 .addGap(0, 19, Short.MAX_VALUE))
         );
 
         add(jPanel4);
 
         startGameButton.setText("Lancer la partie");
-        startGameButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                startGameButtonActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -120,10 +134,10 @@ public class OfflineOptionsPanel extends javax.swing.JPanel {
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 30, Short.MAX_VALUE)
+            .addGap(0, 31, Short.MAX_VALUE)
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel5Layout.createSequentialGroup()
-                    .addGap(0, 3, Short.MAX_VALUE)
+                    .addGap(0, 4, Short.MAX_VALUE)
                     .addComponent(startGameButton)
                     .addGap(0, 4, Short.MAX_VALUE)))
         );
@@ -131,20 +145,16 @@ public class OfflineOptionsPanel extends javax.swing.JPanel {
         add(jPanel5);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void startGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startGameButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_startGameButtonActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField PlayerNameField;
-    private javax.swing.JCheckBox jCheckBox2;
+    private javax.swing.JSlider botNumberSlider;
+    private javax.swing.JCheckBox debugCheckBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JSlider jSlider1;
+    private javax.swing.JTextField playerNameField;
     private javax.swing.JButton startGameButton;
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
