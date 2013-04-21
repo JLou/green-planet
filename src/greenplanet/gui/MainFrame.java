@@ -6,6 +6,7 @@ import greenplanet.gui.chart.GameEnergyRepartition;
 import greenplanet.gui.chart.PiePlayerEnergy;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.event.WindowAdapter;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -24,6 +25,7 @@ public class MainFrame extends JFrame
         BoxLayout layout = new BoxLayout(this, BoxLayout.Y_AXIS);
         current = new StartPanel(this);
         add(current);
+        
         //add(new OfflineOptionsPanel());
     }
     
