@@ -4,24 +4,9 @@
  */
 package greenplanet.gui.events;
 
-import greenplanet.GameHistory;
 import greenplanet.gui.MainFrame;
-import greenplanet.gui.OfflineOptionsPanel;
-import greenplanetclient.ClientException;
-import greenplanetclient.ClientInterface;
-import greenplanetclient.Game;
-import greenplanetclient.GameStateEnum;
-import greenplanetclient.OfflineClient;
-import greenplanetclient.Order;
-import greenplanetclient.Player;
-import java.awt.Component;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.xml.bind.JAXBException;
 
 /**
  *

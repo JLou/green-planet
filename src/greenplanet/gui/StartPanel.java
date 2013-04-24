@@ -5,6 +5,7 @@
 package greenplanet.gui;
 
 import greenplanet.gui.events.OfflineButtonListener;
+import greenplanet.gui.events.OnlineButtonListener;
 import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -35,6 +36,8 @@ public class StartPanel extends JPanel
         
         OfflineButtonListener list = new OfflineButtonListener(_parent);
         offlineButton.addMouseListener(list);
+        
+        onlineButton.addMouseListener(new OnlineButtonListener(_parent));
         add(offlineButton);
         add(onlineButton);
     }

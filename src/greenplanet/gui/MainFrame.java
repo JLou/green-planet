@@ -56,4 +56,11 @@ public class MainFrame extends JFrame
         validate();
 
     }
+
+    public void onlineMode() {
+        remove(current);
+        current = new OnlineOptionsPanel();
+        add(current);
+        validate();
+    }
 }
