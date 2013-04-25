@@ -7,6 +7,7 @@ import greenplanet.gui.chart.PiePlayerEnergy;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -16,7 +17,7 @@ import org.jfree.chart.ChartPanel;
  *
  * @author JLou
  */
-public class MainFrame extends JFrame
+public class MainFrame extends JFrame 
 {
     
     JPanel current;
@@ -26,7 +27,13 @@ public class MainFrame extends JFrame
         current = new StartPanel(this);
         add(current);
         
-        //add(new OfflineOptionsPanel());
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e)
+            {
+                System.exit(0);
+            }
+        });
     }
     
     public void update(GameHistory gh)
