@@ -4,6 +4,7 @@
  */
 package greenplanet;
 
+import greenplanet.data.PlayerInfo;
 import greenplanetclient.Event;
 import greenplanetclient.Game;
 import greenplanetclient.Player;
@@ -17,43 +18,85 @@ import java.util.ArrayList;
 
 public class Turn 
 {
-    protected ArrayList<Player> _players;
+    protected ArrayList<PlayerInfo> _players;
         
     private ArrayList<Integer> _eliminated;
     
     private ArrayList<Event>   _events;
     
-    public ArrayList<Player> getPlayers()
+    private int _water;
+    
+    private int _sun;
+    
+    private int _wind;
+    
+    private float _energyPrice;
+    
+    public ArrayList<PlayerInfo> getPlayers()
     {
         return _players;
     }
     
-    public ArrayList<Player> getAlivePlayers()
+    public ArrayList<PlayerInfo> getAlivePlayers()
     {
         return _players;
     }
     
-    public Player getPlayer(String name)
+    public PlayerInfo getPlayer(String name)
     {
-        for(Player p : _players)
+        for(PlayerInfo p : _players)
         {
-            System.out.println("Playername:" + name + " reading "+p.getName());
             if(p.getName().equals(name))
                 return p;
         }
         return _players.get(_players.size()-1);
     }
+    
+    public float getEnergyPrice()
+    {
+        return _energyPrice;
+    }
     public Turn(Game g)
     {
-        _players = (ArrayList<Player>) g.getPlayers().clone();
+        _players = new ArrayList<>();
         _eliminated = new ArrayList<>();
-        for(Player p : _players)
+        
+        _sun = g.getLight();
+        _water = g.getWater();
+        _wind = g.getWind();
+        
+        for(Player p : g.getPlayers())
         {
+            PlayerInfo pi = new PlayerInfo(p, this);
+            _players.add(pi);
             if(p.getState() == PlayerStateEnum.DEAD)
                 _eliminated.add(_players.indexOf(p));
         }
         
         _events = (ArrayList<Event>) g.getEvents().clone();
+        
+        _energyPrice = g.getPowerPrice();
+    }
+
+    /**
+     * @return the _water
+     */
+    public int getWater() {
+        return _water;
+    }
+
+    /**
+     * @return the _sun
+     */
+    public int getSun() {
+        return _sun;
+    }
+
+    /**
+     * @return the _wind
+     */
+    public int getWind() {
+        return _wind;
     }
     
 }

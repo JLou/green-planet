@@ -16,6 +16,8 @@ public class BuildingCount extends BuildingArray
     public BuildingCount(Player p)
     {
         super(p);
+        computeData();
+
     }
     
     @Override

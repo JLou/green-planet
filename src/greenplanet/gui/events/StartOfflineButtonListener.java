@@ -6,6 +6,7 @@ package greenplanet.gui.events;
 
 import greenplanet.GameHistory;
 import greenplanet.Greenplanet;
+import greenplanet.gui.MainFrame;
 import greenplanet.gui.OfflineOptionsPanel;
 import greenplanetclient.ClientException;
 import greenplanetclient.ClientInterface;
@@ -101,8 +102,12 @@ public class StartOfflineButtonListener extends MouseAdapter
                 game = client.giveOrder(order);
                 gh.addTurn(game);
                 
-                _panel.getDebugArea().setText(Greenplanet.boas.toString());
+//                _panel.getDebugArea().setText(Greenplanet.boas.toString());
+                
+                
             }
+            
+            ((MainFrame) _panel.getFrame()).afterGameMode(gh);
         } catch (JAXBException | InterruptedException | IOException ex) {
             Logger.getLogger(OfflineButtonListener.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClientException ex) {

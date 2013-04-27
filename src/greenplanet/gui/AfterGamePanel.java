@@ -1,8 +1,14 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package greenplanet.gui;
+
+import greenplanet.GameHistory;
+import greenplanet.Turn;
+import greenplanet.data.PlayerInfo;
+import greenplanet.gui.chart.overall.EnergyPriceEvolution;
+import greenplanet.gui.chart.turn.PiePlayerEnergy;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.DefaultComboBoxModel;
+import org.jfree.chart.ChartPanel;
 
 /**
  *
@@ -10,11 +16,71 @@ package greenplanet.gui;
  */
 public class AfterGamePanel extends javax.swing.JPanel {
 
+    private GameHistory _gameHistory;
+    
     /**
      * Creates new form AfterGamePanel
      */
-    public AfterGamePanel() {
+    public AfterGamePanel(final GameHistory gh) {
         initComponents();
+        
+        _gameHistory = gh;
+        
+        final DefaultComboBoxModel model = new DefaultComboBoxModel<>();
+        for(PlayerInfo pi : gh.getTurn(0).getPlayers())
+        {
+            model.addElement(pi.getName());
+        }
+        
+        playerComboBox.setModel(model);
+        playerComboBox.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DefaultComboBoxModel turnModel = new DefaultComboBoxModel();
+                String playerName = model.getSelectedItem().toString();
+                PlayerInfo pi = gh.getTurn(0).getPlayer(playerName);
+                int i = 0;
+                //Only display turns where player is alive
+                while(pi.isAlive())
+                {
+                    i++;
+                    turnModel.addElement(new Integer(i));
+                    pi = gh.getTurn(i).getPlayer(playerName);
+                }
+                turnCombobox.setModel(turnModel);
+                
+                turnCombobox.addActionListener(new ActionListener() {
+
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        updateGraphs();
+                    }
+                });
+            }
+        });
+        
+        //Trigger listeners
+        playerComboBox.setSelectedIndex(0);
+        turnCombobox.setSelectedIndex(0);
+        
+        //Overall charts
+        EnergyPriceEvolution epe = new EnergyPriceEvolution(gh);
+        OverviewTabbedPanel.addTab("Prix de l'énergie", epe.getPanel());
+    }
+    
+    
+    /**
+     * Update graph panels to match user's choice in comboboxes
+     */
+    private void updateGraphs()
+    {
+        int turn = Integer.parseInt(turnCombobox.getSelectedItem().toString());
+        String playerName = playerComboBox.getSelectedItem().toString();
+        
+        PiePlayerEnergy pie = new PiePlayerEnergy(_gameHistory.getTurn(turn), playerName);
+        TurnTabbedPanel.removeAll();
+        TurnTabbedPanel.add("Energy Repartition", pie.getPanel());
     }
 
     /**
@@ -26,95 +92,60 @@ public class AfterGamePanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        ChartTypeTabbedPanel = new javax.swing.JTabbedPane();
         TurnByTurnPanel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
-        jTabbedPane2 = new javax.swing.JTabbedPane();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jTabbedPane3 = new javax.swing.JTabbedPane();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        playerComboBox = new javax.swing.JComboBox();
+        jLabel1 = new javax.swing.JLabel();
+        turnCombobox = new javax.swing.JComboBox();
+        TurnTabbedPanel = new javax.swing.JTabbedPane();
+        OverviewTabbedPanel = new javax.swing.JTabbedPane();
 
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
 
-        jTabbedPane1.setToolTipText("");
-        jTabbedPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        ChartTypeTabbedPanel.setToolTipText("");
+        ChartTypeTabbedPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         TurnByTurnPanel.setLayout(new javax.swing.BoxLayout(TurnByTurnPanel, javax.swing.BoxLayout.Y_AXIS));
 
-        jPanel1.setMaximumSize(new java.awt.Dimension(69, 60));
-        jPanel1.setMinimumSize(new java.awt.Dimension(69, 60));
-        jPanel1.setPreferredSize(new java.awt.Dimension(69, 60));
+        jPanel1.setMaximumSize(new java.awt.Dimension(500, 60));
+        jPanel1.setMinimumSize(new java.awt.Dimension(500, 60));
+        jPanel1.setPreferredSize(new java.awt.Dimension(69, 30));
 
-        jLabel1.setText("Tour ");
+        jLabel2.setText("Joueur :");
+        jPanel1.add(jLabel2);
+
+        playerComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel1.add(playerComboBox);
+
+        jLabel1.setText("Tour: ");
         jPanel1.add(jLabel1);
-        jPanel1.add(jSpinner1);
+
+        turnCombobox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel1.add(turnCombobox);
 
         TurnByTurnPanel.add(jPanel1);
 
-        jTabbedPane2.setTabPlacement(javax.swing.JTabbedPane.LEFT);
+        TurnTabbedPanel.setTabPlacement(javax.swing.JTabbedPane.LEFT);
+        TurnByTurnPanel.add(TurnTabbedPanel);
 
-        jLabel2.setText("FAUT BOSSER PDS");
-        jTabbedPane2.addTab("Repartition Energies", jLabel2);
+        ChartTypeTabbedPanel.addTab("Tour par Tour", TurnByTurnPanel);
 
-        jLabel3.setText("FAUT BOSSER PDS");
-        jTabbedPane2.addTab("Batiments", jLabel3);
+        OverviewTabbedPanel.setTabPlacement(javax.swing.JTabbedPane.LEFT);
+        ChartTypeTabbedPanel.addTab("Overview", OverviewTabbedPanel);
 
-        jLabel4.setText("FAUT BOSSER PDS");
-        jTabbedPane2.addTab("Production Energie", jLabel4);
-
-        jLabel5.setText("FAUT BOSSER PDS");
-        jTabbedPane2.addTab("DUNNO", jLabel5);
-
-        TurnByTurnPanel.add(jTabbedPane2);
-
-        jTabbedPane1.addTab("Tour par Tour", TurnByTurnPanel);
-
-        jTabbedPane3.setTabPlacement(javax.swing.JTabbedPane.LEFT);
-
-        jLabel6.setText("12->15");
-        jTabbedPane3.addTab("Prix Energie", jLabel6);
-
-        jLabel7.setText("12->15");
-        jTabbedPane3.addTab("Prod", jLabel7);
-
-        jLabel8.setText("12->15");
-        jTabbedPane3.addTab("XXX", jLabel8);
-
-        jLabel9.setText("12->15");
-        jTabbedPane3.addTab("YY", jLabel9);
-
-        jLabel10.setText("12->15");
-        jTabbedPane3.addTab("Z", jLabel10);
-
-        jTabbedPane1.addTab("Overview", jTabbedPane3);
-
-        add(jTabbedPane1);
+        add(ChartTypeTabbedPanel);
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTabbedPane ChartTypeTabbedPanel;
+    private javax.swing.JTabbedPane OverviewTabbedPanel;
     private javax.swing.JPanel TurnByTurnPanel;
+    private javax.swing.JTabbedPane TurnTabbedPanel;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTabbedPane jTabbedPane3;
+    private javax.swing.JComboBox playerComboBox;
+    private javax.swing.JComboBox turnCombobox;
     // End of variables declaration//GEN-END:variables
 }

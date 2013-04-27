@@ -112,6 +112,7 @@
       <SubComponents>
         <Component class="javax.swing.JCheckBox" name="debugCheckBox">
           <Properties>
+            <Property name="selected" type="boolean" value="true"/>
             <Property name="text" type="java.lang.String" value="Activer le mode debug"/>
           </Properties>
         </Component>

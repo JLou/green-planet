@@ -20,7 +20,6 @@ public abstract class BuildingArray
     {
         _buildings = new int[NB_BUILDING_TYPE];
         _player = p;
-        computeData();
     }
     
     public abstract void computeData();

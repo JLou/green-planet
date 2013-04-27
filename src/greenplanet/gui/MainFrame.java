@@ -2,10 +2,9 @@ package greenplanet.gui;
 
 import greenplanet.GameHistory;
 import greenplanet.Turn;
-import greenplanet.gui.chart.GameEnergyRepartition;
-import greenplanet.gui.chart.PiePlayerEnergy;
+import greenplanet.gui.chart.turn.GameEnergyRepartition;
+import greenplanet.gui.chart.turn.PiePlayerEnergy;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.BoxLayout;
@@ -57,17 +56,22 @@ public class MainFrame extends JFrame
     
     public void offlineMode()
     {
-        remove(current);
-        current = new OfflineOptionsPanel();
-        add(current);
-        validate();
-
+        replacePanel(new OfflineOptionsPanel(this));
     }
 
     public void onlineMode() {
+        replacePanel(new OnlineOptionsPanel());
+        
+    }
+    private void replacePanel(JPanel p)
+    {
         remove(current);
-        current = new OnlineOptionsPanel();
+        current = p;
         add(current);
         validate();
+    }
+    public void afterGameMode(GameHistory gh)
+    {
+        replacePanel(new AfterGamePanel(gh));
     }
 }

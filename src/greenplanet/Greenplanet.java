@@ -32,12 +32,12 @@ public class Greenplanet {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             Logger.getLogger(OfflineOptionsPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        /*
         boas = new ByteArrayOutputStream();
         ps = new PrintStream(boas);
         PrintStream stdout = System.out;
         System.setOut(ps);
-        
+        */
         
         MainFrame frame = new MainFrame();
         frame.setSize(600, 600);

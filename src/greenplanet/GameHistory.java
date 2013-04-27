@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package greenplanet;
 
 import greenplanetclient.Game;
@@ -29,6 +25,11 @@ public class GameHistory
     public Turn getTurn(int index)
     {
         return _turns.get(index);
+    }
+    
+    public int count()
+    {
+        return _turns.size();
     }
     
     public Turn getCurrentTurn()
