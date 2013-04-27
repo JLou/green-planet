@@ -33,20 +33,11 @@ public class BuildingValue extends BuildingArray
      */
     private int computeProduction(BuildingInfo bi)
     {
-        int reliableProd = 100 - bi.getSolarDependency() - bi.getWaterDependency() - bi.getWindDependency();
-        
-        System.out.println("Computing " + bi.getName());
-        System.out.println("Weather :");
-        System.out.println("Sun :"  + _turn.getSun());
-        System.out.println("Wind :"  + _turn.getWind());
-        System.out.println("Water :"  + _turn.getWater());
-        
+        int reliableProd = 100 - bi.getSolarDependency() - bi.getWaterDependency() - bi.getWindDependency();        
         int a = bi.getProd() * 
                 (reliableProd + bi.getSolarDependency() * _turn.getSun() / 100
                 + bi.getWaterDependency() * _turn.getWater() / 100
                 + bi.getWindDependency() * _turn.getWind() / 100) / 100;
-        
-        System.out.println("Result = " + a);
         return a;
     }
     @Override

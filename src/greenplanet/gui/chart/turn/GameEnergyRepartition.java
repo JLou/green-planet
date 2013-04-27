@@ -7,6 +7,7 @@ package greenplanet.gui.chart.turn;
 import greenplanet.BuildingInfo;
 import greenplanet.Turn;
 import greenplanet.data.BuildingCount;
+import greenplanet.data.BuildingValue;
 import greenplanet.data.PlayerInfo;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -41,7 +42,7 @@ public final class GameEnergyRepartition extends AbstractTurnChart
         
         for(PlayerInfo p : _turn.getPlayers())
         {
-            BuildingCount bc = p.getBuildingsCount();
+            BuildingValue bc = p.getBuildingsValues();
             for(BuildingInfo bi : BuildingInfo.getValues())
             {
                 try {

@@ -43,7 +43,7 @@ public class PlayerInfo
     /**
      * Return the production of all the plant of one type
      * @param buildingType Type of plant you want the production of
-     * @return int The production of the plants
+     * @return int The production of the buildings of this type
      * @throws Exception 
      */
     public int getProduction(int buildingType) throws Exception

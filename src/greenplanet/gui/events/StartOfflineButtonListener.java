@@ -5,7 +5,6 @@
 package greenplanet.gui.events;
 
 import greenplanet.GameHistory;
-import greenplanet.Greenplanet;
 import greenplanet.gui.MainFrame;
 import greenplanet.gui.OfflineOptionsPanel;
 import greenplanetclient.ClientException;

@@ -4,6 +4,7 @@ import greenplanet.GameHistory;
 import greenplanet.Turn;
 import greenplanet.data.PlayerInfo;
 import greenplanet.gui.chart.overall.EnergyPriceEvolution;
+import greenplanet.gui.chart.turn.GameEnergyRepartition;
 import greenplanet.gui.chart.turn.PiePlayerEnergy;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,70 +18,79 @@ import org.jfree.chart.ChartPanel;
 public class AfterGamePanel extends javax.swing.JPanel {
 
     private GameHistory _gameHistory;
-    
+
     /**
      * Creates new form AfterGamePanel
      */
     public AfterGamePanel(final GameHistory gh) {
         initComponents();
-        
+
         _gameHistory = gh;
-        
+
         final DefaultComboBoxModel model = new DefaultComboBoxModel<>();
-        for(PlayerInfo pi : gh.getTurn(0).getPlayers())
-        {
+        model.addElement("Tous");
+        for (PlayerInfo pi : gh.getTurn(0).getPlayers()) {
             model.addElement(pi.getName());
         }
-        
+
         playerComboBox.setModel(model);
         playerComboBox.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 DefaultComboBoxModel turnModel = new DefaultComboBoxModel();
-                String playerName = model.getSelectedItem().toString();
-                PlayerInfo pi = gh.getTurn(0).getPlayer(playerName);
-                int i = 0;
-                //Only display turns where player is alive
-                while(pi.isAlive())
-                {
-                    i++;
-                    turnModel.addElement(new Integer(i));
-                    pi = gh.getTurn(i).getPlayer(playerName);
+                if (playerComboBox.getSelectedIndex() == 0) {
+                    for (int i = 0; i < _gameHistory.count(); i++) {
+                        turnModel.addElement(i+1);
+                    }
+                } else {
+                    String playerName = model.getSelectedItem().toString();
+                    PlayerInfo pi = gh.getTurn(0).getPlayer(playerName);
+                    int i = 0;
+                    //Only display turns where player is alive
+                    while (pi.isAlive()) {
+                        i++;
+                        turnModel.addElement(new Integer(i));
+                        pi = gh.getTurn(i).getPlayer(playerName);
+                    }
                 }
                 turnCombobox.setModel(turnModel);
-                
-                turnCombobox.addActionListener(new ActionListener() {
 
+                turnCombobox.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         updateGraphs();
                     }
                 });
+
+                turnCombobox.setSelectedIndex(0);
             }
         });
-        
+
         //Trigger listeners
         playerComboBox.setSelectedIndex(0);
         turnCombobox.setSelectedIndex(0);
-        
+
         //Overall charts
         EnergyPriceEvolution epe = new EnergyPriceEvolution(gh);
         OverviewTabbedPanel.addTab("Prix de l'énergie", epe.getPanel());
     }
-    
-    
+
     /**
      * Update graph panels to match user's choice in comboboxes
      */
-    private void updateGraphs()
-    {
-        int turn = Integer.parseInt(turnCombobox.getSelectedItem().toString());
-        String playerName = playerComboBox.getSelectedItem().toString();
-        
-        PiePlayerEnergy pie = new PiePlayerEnergy(_gameHistory.getTurn(turn), playerName);
+    private void updateGraphs() {
         TurnTabbedPanel.removeAll();
-        TurnTabbedPanel.add("Energy Repartition", pie.getPanel());
+        int turn = Integer.parseInt(turnCombobox.getSelectedItem().toString()) - 1;
+        //All players
+        if (playerComboBox.getSelectedIndex() == 0) {
+            GameEnergyRepartition chart = new GameEnergyRepartition(_gameHistory.getTurn(turn));
+            TurnTabbedPanel.add("Energy Repartition", chart.getPanel());
+        } else {
+            String playerName = playerComboBox.getSelectedItem().toString();
+
+            PiePlayerEnergy pie = new PiePlayerEnergy(_gameHistory.getTurn(turn), playerName);
+            TurnTabbedPanel.add("Energy Repartition", pie.getPanel());
+        }
     }
 
     /**
