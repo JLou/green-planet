@@ -6,6 +6,9 @@ package greenplanet.gui.chart.overall;
 
 import greenplanet.GameHistory;
 import org.jfree.chart.ChartFactory;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.data.xy.DefaultXYDataset;
 import org.jfree.data.xy.XYDataset;
 
@@ -20,15 +23,22 @@ public class EnergyPriceEvolution extends AbstractChart
     {
         super(gh);
         XYDataset dataset = createDataset();
-        _chart = ChartFactory.createTimeSeriesChart(
-            "Legal & General Unit Trust Prices",  // title
+        _chart = ChartFactory.createXYLineChart(
+            "Prix de l'énergie",  // title
             "Tour",             // x-axis label
             "Prix",   // y-axis label
             dataset,            // data
+            PlotOrientation.VERTICAL,
             true,               // create legend?
             true,               // generate tooltips?
             false               // generate URLs?
         );
+        
+        XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
+        renderer.setSeriesShapesVisible(0, true);
+        
+        XYPlot plot = (XYPlot) _chart.getPlot();
+        plot.setRenderer(renderer);
     }
 
     @Override
