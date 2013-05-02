@@ -26,7 +26,7 @@ public class EnergyPriceEvolution extends AbstractChart
         _chart = ChartFactory.createXYLineChart(
             "Prix de l'énergie",  // title
             "Tour",             // x-axis label
-            "Prix",   // y-axis label
+            "Prix en euros",   // y-axis label
             dataset,            // data
             PlotOrientation.VERTICAL,
             true,               // create legend?
@@ -51,7 +51,7 @@ public class EnergyPriceEvolution extends AbstractChart
         for (int i = 0; i < _gameHistory.count(); i++) {
             xValues[i] = i;
             yValues[i] = _gameHistory.getTurn(i).getEnergyPrice();
-                    }
+        }
         data.addSeries("Power Price", new double[][] {xValues, yValues});
         
         return data;

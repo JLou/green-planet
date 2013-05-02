@@ -4,6 +4,7 @@ import greenplanet.GameHistory;
 import greenplanet.Turn;
 import greenplanet.data.PlayerInfo;
 import greenplanet.gui.chart.overall.EnergyPriceEvolution;
+import greenplanet.gui.chart.overall.MoneyEarned;
 import greenplanet.gui.chart.turn.GameEnergyRepartition;
 import greenplanet.gui.chart.turn.PiePlayerEnergy;
 import java.awt.event.ActionEvent;
@@ -73,6 +74,8 @@ public class AfterGamePanel extends javax.swing.JPanel {
         //Overall charts
         EnergyPriceEvolution epe = new EnergyPriceEvolution(gh);
         OverviewTabbedPanel.addTab("Prix de l'énergie", epe.getPanel());
+        MoneyEarned me = new MoneyEarned(gh);
+        OverviewTabbedPanel.addTab("Argent des joueurs", me.getPanel());
     }
 
     /**

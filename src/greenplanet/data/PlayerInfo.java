@@ -24,11 +24,14 @@ public class PlayerInfo
     
     private Turn _turn;
     
+    private float _cash;
+    
     public PlayerInfo(Player p, Turn t)
     {
         _buildingsCount = new BuildingCount(p);
         _buildingsValues = new BuildingValue(p, t);
         
+        _cash = p.getCash();
         _name = p.getName();
         _turn = t;
         _isAlive = p.getState() == PlayerStateEnum.ALIVE;
@@ -49,6 +52,11 @@ public class PlayerInfo
     public int getProduction(int buildingType) throws Exception
     {
         return getBuildingsValues().getBuildingValue(buildingType);
+    }
+    
+    public float getCash()
+    {
+        return _cash;
     }
 
     public String getName() {
