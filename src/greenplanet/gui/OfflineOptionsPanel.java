@@ -4,55 +4,51 @@ import greenplanet.gui.events.StartOfflineButtonListener;
 
 /**
  * Panel to select options to play offline
+ *
  * @author JLou
  */
 public class OfflineOptionsPanel extends javax.swing.JPanel {
 
     private MainFrame _frame;
-    
-    
+
     /**
      * Creates new form OfflineOptionsPanel
      */
     public OfflineOptionsPanel(MainFrame mf) {
         _frame = mf;
         initComponents();
-        
+
         startGameButton.addMouseListener(new StartOfflineButtonListener(this));
     }
-    
-    
+
     /**
-     * 
+     *
      * @return name inside the player name field
      */
-    public String getPlayerName()
-    {
+    public String getPlayerName() {
         return playerNameField.getText();
     }
-    
+
     /**
-     * 
+     *
      * @return whether the debug checkbox is activated
      */
-    public boolean isDebugActivated()
-    {
+    public boolean isDebugActivated() {
         return debugCheckBox.isSelected();
     }
-    
+
     /**
-     * 
+     *
      * @return value of the bot number slider
      */
-    public int getBotNumber()
-    {
+    public int getBotNumber() {
         return botNumberSlider.getValue();
     }
-    
-    public MainFrame getFrame()
-    {
+
+    public MainFrame getFrame() {
         return _frame;
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -160,7 +156,6 @@ public class OfflineOptionsPanel extends javax.swing.JPanel {
 
         add(jPanel5);
     }// </editor-fold>//GEN-END:initComponents
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSlider botNumberSlider;
     private javax.swing.JCheckBox debugCheckBox;

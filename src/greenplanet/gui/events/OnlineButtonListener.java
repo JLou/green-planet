@@ -10,21 +10,19 @@ import java.awt.event.MouseEvent;
 
 /**
  * Handles click on the online button
+ *
  * @author JLou
  */
-public class OnlineButtonListener extends MouseAdapter
-{
+public class OnlineButtonListener extends MouseAdapter {
 
     MainFrame _frame;
-    public OnlineButtonListener(MainFrame frame)
-    {
+
+    public OnlineButtonListener(MainFrame frame) {
         _frame = frame;
     }
-    
+
     @Override
-    public void mouseClicked(MouseEvent e)
-    {
+    public void mouseClicked(MouseEvent e) {
         _frame.onlineMode();
     }
-    
 }

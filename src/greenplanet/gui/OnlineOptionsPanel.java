@@ -2,6 +2,7 @@ package greenplanet.gui;
 
 /**
  * Panel to select the Online game options
+ *
  * @author JLou
  */
 public class OnlineOptionsPanel extends javax.swing.JPanel {
@@ -11,7 +12,7 @@ public class OnlineOptionsPanel extends javax.swing.JPanel {
      */
     public OnlineOptionsPanel() {
         initComponents();
-        
+
         startGameButton.addMouseListener(null);
     }
 
@@ -63,7 +64,6 @@ public class OnlineOptionsPanel extends javax.swing.JPanel {
     private void playerNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playerNameFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_playerNameFieldActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSpinner gameNumberSpinner;
     private javax.swing.JLabel jLabel1;
@@ -77,9 +77,8 @@ public class OnlineOptionsPanel extends javax.swing.JPanel {
     public int getGameID() {
         return (int) gameNumberSpinner.getValue();
     }
-    
-    public String getPlayerName()
-    {
+
+    public String getPlayerName() {
         return playerNameField.getText();
     }
 }

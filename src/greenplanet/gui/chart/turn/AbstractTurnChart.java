@@ -9,14 +9,14 @@ import greenplanet.gui.chart.AbstractChart;
 
 /**
  * Chart displaying information about a specific turn
+ *
  * @author JLou
  */
-public abstract class AbstractTurnChart extends AbstractChart
-{
+public abstract class AbstractTurnChart extends AbstractChart {
+
     protected Turn _turn;
-    
-    public AbstractTurnChart(Turn t)
-    {
+
+    public AbstractTurnChart(Turn t) {
         _turn = t;
     }
 }

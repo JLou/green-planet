@@ -5,24 +5,21 @@ import greenplanetclient.Player;
 
 /**
  * Save the amount of building of each type the player has
+ *
  * @author JLou
  */
-public class BuildingCount extends BuildingArray
-{
-    public BuildingCount(Player p)
-    {
+public class BuildingCount extends BuildingArray {
+
+    public BuildingCount(Player p) {
         super(p);
         computeData();
 
     }
-    
+
     @Override
-    public final void computeData()
-    {
-        for(Building b : _player.getBuildings())
-        {
-            switch(b.getType())
-            {
+    public final void computeData() {
+        for (Building b : _player.getBuildings()) {
+            switch (b.getType()) {
                 case "water_turbine":
                     _buildings[WATER]++;
                     break;
@@ -37,7 +34,7 @@ public class BuildingCount extends BuildingArray
                     break;
                 case "coal_fired_plant":
                     _buildings[COAL]++;
-                    break;           
+                    break;
             }
         }
     }

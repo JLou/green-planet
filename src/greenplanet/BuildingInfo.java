@@ -7,46 +7,36 @@ package greenplanet;
 import org.apache.http.protocol.HTTP;
 
 /**
- * Handy values to quickly access parameters 
- * across all the program
+ * Handy values to quickly access parameters across all the program
+ *
  * @author JLou
  */
-public enum BuildingInfo 
-{
+public enum BuildingInfo {
+
     /**
-     * DO NOT TOUCH UNLESS RULES ARE MODIFIED
-     * sD  = solarDependency
-     * wD  = windDependency
-     * waD = waterDependency
-     * ORDER index   cost  bonus     prod    sD   wD    waD name     */
-    NUCLEAR( 0,     1000, -100,     1000,    0,    0,    0, "nuclear"),
-    WATER  ( 1,     500,   300,      300,    0,    0,   50, "water_turbine"),
-    WIND   ( 2,     100,   100,      100,    0,  100,    0, "wind_turbine"),
-    SUN    ( 3,     200,     0,      100,  100,    0,    0, "solar_plant"),
-    COAL   ( 4,     400,  -200,      500,    0,    0,    0, "coal_fired_plant");
+     * DO NOT TOUCH UNLESS RULES ARE MODIFIED sD = solarDependency wD =
+     * windDependency waD = waterDependency ORDER index cost bonus prod sD wD
+     * waD name
+     */
+    NUCLEAR(0, 1000, -100, 1000, 0, 0, 0, "nuclear"),
+    WATER(1, 500, 300, 300, 0, 0, 50, "water_turbine"),
+    WIND(2, 100, 100, 100, 0, 100, 0, "wind_turbine"),
+    SUN(3, 200, 0, 100, 100, 0, 0, "solar_plant"),
+    COAL(4, 400, -200, 500, 0, 0, 0, "coal_fired_plant");
     // END OF DO NOT TOUCH
-    
     private int _cost;
-    
     private int _bonus;
-    
     private int _prod;
-    
     private int _solarDependency;
-    
     private int _windDependency;
-    
     private int _waterDependency;
-    
     private String _name;
-    
     private int _index;
-    
     private static BuildingInfo[] _values = null;
-    
-    
+
     /**
      * Create building information
+     *
      * @param index
      * @param cost
      * @param bonus
@@ -54,64 +44,61 @@ public enum BuildingInfo
      * @param solarDependency
      * @param windDependency
      * @param waterDependency
-     * @param name 
+     * @param name
      */
     private BuildingInfo(int index, int cost, int bonus, int prod, int solarDependency,
-                      int windDependency, int waterDependency,
-                      String name)
-    {
-        
+            int windDependency, int waterDependency,
+            String name) {
+
         _index = index;
-        
+
         _cost = cost;
-        
+
         _bonus = bonus;
-        
+
         _prod = prod;
-        
+
         _windDependency = windDependency;
         _solarDependency = solarDependency;
         _waterDependency = waterDependency;
-        
+
         _name = name;
     }
-    
+
     /**
      * Return building info based on his name
-     * @see HTTP://green-planet-project.com for list of buildings and 
-     * matching names
+     *
+     * @see HTTP://green-planet-project.com for list of buildings and matching
+     * names
      * @param name
      * @return BuildingInfo matching building
      * @throws Exception No matching building was found
      */
-    public BuildingInfo getBuilding(String name) throws Exception
-    {
-        for(BuildingInfo bi : BuildingInfo.values())
-        {
-            if(bi.getName().equals(name))
+    public BuildingInfo getBuilding(String name) throws Exception {
+        for (BuildingInfo bi : BuildingInfo.values()) {
+            if (bi.getName().equals(name)) {
                 return bi;
+            }
         }
-        
+
         throw new Exception("No matching building");
     }
 
-    
     /**
-     * 
+     *
      * @return Array with all the building sorted by index order
      */
-    public static BuildingInfo[] getValues()
-    {
-        if(_values == null)
-            _values = new BuildingInfo[] { NUCLEAR, WATER, WIND, SUN, COAL };
+    public static BuildingInfo[] getValues() {
+        if (_values == null) {
+            _values = new BuildingInfo[]{NUCLEAR, WATER, WIND, SUN, COAL};
+        }
         return _values;
     }
-    
-    
+
     public int getIndex() {
         return _index;
     }
-    
+
     /**
      * @return the cost of the building
      */
@@ -160,6 +147,4 @@ public enum BuildingInfo
     public String getName() {
         return _name;
     }
-    
-    
 }

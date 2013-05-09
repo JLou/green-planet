@@ -11,24 +11,21 @@ import org.jfree.data.general.Dataset;
 
 /**
  * Overall chart displaying information about the whole game
+ *
  * @author JLou
  */
-public abstract class AbstractChart 
-{
+public abstract class AbstractChart {
+
     protected JFreeChart _chart;
     protected GameHistory _gameHistory;
-    
-    
-    public AbstractChart(GameHistory gh)
-    {
+
+    public AbstractChart(GameHistory gh) {
         _gameHistory = gh;
     }
-    
-    public ChartPanel getPanel()
-    {
+
+    public ChartPanel getPanel() {
         return new ChartPanel(_chart);
     }
-    
-    protected abstract Dataset createDataset(); 
 
+    protected abstract Dataset createDataset();
 }

@@ -12,12 +12,13 @@ import org.jfree.data.xy.XYDataset;
 
 /**
  * Display money earned by the players through the game
+ *
  * @author JLou
  */
 public class MoneyEarned extends AbstractChart {
 
     /**
-     * 
+     *
      * @param gh The game history
      */
     public MoneyEarned(GameHistory gh) {
@@ -40,12 +41,12 @@ public class MoneyEarned extends AbstractChart {
         HashMap<String, double[]> map = new HashMap<>();
         Turn t = _gameHistory.getCurrentTurn();
         int turnCount = _gameHistory.count();
-        
+
         //Insert values
         for (PlayerInfo p : t.getPlayers()) {
             map.put(p.getName(), new double[turnCount]);
         }
-        
+
         //Retrieve and save datas
         for (int i = 1; i < turnCount; i++) {
             Turn prev = _gameHistory.getTurn(i - 1);
@@ -54,10 +55,10 @@ public class MoneyEarned extends AbstractChart {
             //Go through players
             for (PlayerInfo p : current.getPlayers()) {
                 float cash = p.getCash();
-                
+
                 //Calculate difference in cash
                 float diff = cash - prev.getPlayer(p.getName()).getCash();
-                
+
                 //Avoid awkward exception
                 if (map.containsKey(p.getName())) {
                     double[] data = map.get(p.getName());
@@ -66,15 +67,15 @@ public class MoneyEarned extends AbstractChart {
                 }
             }
         }
-        
+
         for (Map.Entry<String, double[]> entry : map.entrySet()) {
             double[] turns = new double[turnCount];
             for (int i = 0; i < turnCount; i++) {
-                turns[i] = i+1;
+                turns[i] = i + 1;
             }
             entry.getValue();
-            dataset.addSeries(entry.getKey(), 
-                    new double[][] { turns, entry.getValue() });
+            dataset.addSeries(entry.getKey(),
+                    new double[][]{turns, entry.getValue()});
         }
         return dataset;
     }

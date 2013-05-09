@@ -14,29 +14,28 @@ import org.jfree.data.xy.XYDataset;
 
 /**
  * Display the evolution of the energy price
+ *
  * @author JLou
  */
-public final class EnergyPriceEvolution extends AbstractChart
-{
-    
-    public EnergyPriceEvolution(GameHistory gh)
-    {
+public final class EnergyPriceEvolution extends AbstractChart {
+
+    public EnergyPriceEvolution(GameHistory gh) {
         super(gh);
         XYDataset dataset = createDataset();
         _chart = ChartFactory.createXYLineChart(
-            "Prix de l'énergie",  // title
-            "Tour",             // x-axis label
-            "Prix en euros",   // y-axis label
-            dataset,            // data
-            PlotOrientation.VERTICAL,
-            true,               // create legend?
-            true,               // generate tooltips?
-            false               // generate URLs?
-        );
-        
+                "Prix de l'énergie", // title
+                "Tour", // x-axis label
+                "Prix en euros", // y-axis label
+                dataset, // data
+                PlotOrientation.VERTICAL,
+                true, // create legend?
+                true, // generate tooltips?
+                false // generate URLs?
+                );
+
         XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
         renderer.setSeriesShapesVisible(0, true);
-        
+
         XYPlot plot = (XYPlot) _chart.getPlot();
         plot.setRenderer(renderer);
     }
@@ -44,7 +43,7 @@ public final class EnergyPriceEvolution extends AbstractChart
     @Override
     protected XYDataset createDataset() {
         DefaultXYDataset data = new DefaultXYDataset();
-        
+
         double[] xValues, yValues;
         xValues = new double[_gameHistory.count()];
         yValues = new double[_gameHistory.count()];
@@ -52,9 +51,8 @@ public final class EnergyPriceEvolution extends AbstractChart
             xValues[i] = i;
             yValues[i] = _gameHistory.getTurn(i).getEnergyPrice();
         }
-        data.addSeries("Power Price", new double[][] {xValues, yValues});
-        
+        data.addSeries("Power Price", new double[][]{xValues, yValues});
+
         return data;
     }
-    
 }

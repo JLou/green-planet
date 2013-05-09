@@ -13,8 +13,8 @@ import java.awt.event.ActionListener;
 import javax.swing.DefaultComboBoxModel;
 
 /**
- * Chart panel displayed after a game to see visual information about
- * the game
+ * Chart panel displayed after a game to see visual information about the game
+ *
  * @author JLou
  */
 public class AfterGamePanel extends javax.swing.JPanel {
@@ -37,19 +37,19 @@ public class AfterGamePanel extends javax.swing.JPanel {
         }
 
         playerComboBox.setModel(model);
-        
+
         //Called on player changed in combobox
         playerComboBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 DefaultComboBoxModel turnModel = new DefaultComboBoxModel();
-                
+
                 //Selected all players (special #0 option
                 if (playerComboBox.getSelectedIndex() == 0) {
                     for (int i = 0; i < _gameHistory.count(); i++) {
-                        turnModel.addElement(i+1);
+                        turnModel.addElement(i + 1);
                     }
-                //Specific player
+                    //Specific player
                 } else {
                     String playerName = model.getSelectedItem().toString();
                     PlayerInfo pi = gh.getTurn(0).getPlayer(playerName);
@@ -99,7 +99,7 @@ public class AfterGamePanel extends javax.swing.JPanel {
             TurnTabbedPanel.add("Total Energy Repartition", ter.getPanel());
             EcoBonus eco = new EcoBonus(_gameHistory.getTurn(turn));
             TurnTabbedPanel.add("Eco bonus", eco.getPanel());
-            
+
         } else {
             String playerName = playerComboBox.getSelectedItem().toString();
 

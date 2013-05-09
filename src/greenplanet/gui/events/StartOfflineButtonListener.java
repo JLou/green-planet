@@ -19,26 +19,26 @@ import java.util.logging.Logger;
 import javax.xml.bind.JAXBException;
 
 /**
- * Start an offline game 
+ * Start an offline game
+ *
  * @author JLou
  */
-public class StartOfflineButtonListener extends MouseAdapter
-{
+public class StartOfflineButtonListener extends MouseAdapter {
 
-    OfflineOptionsPanel _panel; 
-    public StartOfflineButtonListener(OfflineOptionsPanel panel)
-    {
+    OfflineOptionsPanel _panel;
+
+    public StartOfflineButtonListener(OfflineOptionsPanel panel) {
         _panel = panel;
     }
-    
+
     @Override
     public void mouseClicked(MouseEvent e) {
         //Amazing symetry
-        
+
         int botNumber = _panel.getBotNumber();
         boolean debug = _panel.isDebugActivated();
         String player = _panel.getPlayerName();
-        
+
         GameHistory gh = new GameHistory();
         float cash;
         float energy;
@@ -96,12 +96,12 @@ public class StartOfflineButtonListener extends MouseAdapter
                 }
                 game = client.giveOrder(order);
                 gh.addTurn(game);
-                
+
 //                _panel.getDebugArea().setText(Greenplanet.boas.toString());
-                
-                
+
+
             }
-            
+
             ((MainFrame) _panel.getFrame()).afterGameMode(gh);
         } catch (JAXBException | InterruptedException | IOException ex) {
             Logger.getLogger(OfflineButtonListener.class.getName()).log(Level.SEVERE, null, ex);

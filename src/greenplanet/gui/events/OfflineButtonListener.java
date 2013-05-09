@@ -10,6 +10,7 @@ import java.awt.event.MouseListener;
 
 /**
  * Handle click on the offline game
+ *
  * @author JLou
  */
 public class OfflineButtonListener implements MouseListener {
@@ -23,7 +24,7 @@ public class OfflineButtonListener implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         //_frame.update(gh);
-        
+
         _frame.offlineMode();
     }
 

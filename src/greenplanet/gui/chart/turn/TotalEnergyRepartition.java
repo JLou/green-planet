@@ -11,33 +11,29 @@ import org.jfree.data.general.DefaultPieDataset;
 
 /**
  * Repartition of the global energy in the turn
+ *
  * @author JLou
  */
 public class TotalEnergyRepartition extends AbstractTurnChart {
-    
+
     DefaultPieDataset dataset;
-    
-    public TotalEnergyRepartition(Turn t)
-    {
+
+    public TotalEnergyRepartition(Turn t) {
         super(t);
         dataset = createDataset();
         _chart = ChartFactory.createPieChart("Total Energy Repartition",
                 dataset, true, true, false);
     }
-    
-    
+
     @Override
-    protected final DefaultPieDataset createDataset() 
-    {
+    protected final DefaultPieDataset createDataset() {
         DefaultPieDataset result = new DefaultPieDataset();
-        
-        for(PlayerInfo p : _turn.getAlivePlayers())
-        {
+
+        for (PlayerInfo p : _turn.getAlivePlayers()) {
             BuildingValue bc = p.getBuildingsValues();
             int total = 0;
-            
-            for(BuildingInfo bi : BuildingInfo.getValues())
-            {
+
+            for (BuildingInfo bi : BuildingInfo.getValues()) {
                 try {
                     total += bc.getBuildingValue(bi.getIndex());
                 } catch (Exception ex) {

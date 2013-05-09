@@ -9,95 +9,86 @@ import java.util.ArrayList;
 
 /**
  * Informations about a game turn
+ *
  * @author JLou
  */
+public class Turn {
 
-public class Turn 
-{
     protected ArrayList<PlayerInfo> _players;
-        
     private ArrayList<Integer> _eliminated;
-    
-    private ArrayList<Event>   _events;
-    
+    private ArrayList<Event> _events;
     private int _water;
-    
     private int _sun;
-    
     private int _wind;
-    
     private float _energyPrice;
-    
+
     /**
-     * 
+     *
      * @return list of all the players in this turn
      */
-    public ArrayList<PlayerInfo> getPlayers()
-    {
+    public ArrayList<PlayerInfo> getPlayers() {
         return _players;
     }
-    
+
     /**
-     * 
+     *
      * @return list of all the alive players in this turn
      */
-    public ArrayList<PlayerInfo> getAlivePlayers()
-    {
+    public ArrayList<PlayerInfo> getAlivePlayers() {
         ArrayList<PlayerInfo> alives = new ArrayList<>();
         for (int i = 0; i < _players.size(); i++) {
-            if(_players.get(i).isAlive())
+            if (_players.get(i).isAlive()) {
                 alives.add(_players.get(i));
+            }
         }
         return alives;
     }
-    
+
     /**
-     * 
+     *
      * @param name of the wanted player
      * @return the playerinfo in this turn
      */
-    public PlayerInfo getPlayer(String name)
-    {
-        for(PlayerInfo p : _players)
-        {
-            if(p.getName().equals(name))
+    public PlayerInfo getPlayer(String name) {
+        for (PlayerInfo p : _players) {
+            if (p.getName().equals(name)) {
                 return p;
+            }
         }
-        return _players.get(_players.size()-1);
+        return _players.get(_players.size() - 1);
     }
-    
+
     /**
-     * 
+     *
      * @return energy price in this turn
      */
-    public float getEnergyPrice()
-    {
+    public float getEnergyPrice() {
         return _energyPrice;
     }
-    
+
     /**
      * Constructor
+     *
      * @param Game
      */
-    public Turn(Game g)
-    {
+    public Turn(Game g) {
         _players = new ArrayList<>();
         _eliminated = new ArrayList<>();
-        
+
         _sun = g.getLight();
         _water = g.getWater();
         _wind = g.getWind();
-        
-        for(Player p : g.getPlayers())
-        {
+
+        for (Player p : g.getPlayers()) {
             PlayerInfo pi = new PlayerInfo(p, this);
             _players.add(pi);
-            if(p.getState() == PlayerStateEnum.DEAD)
+            if (p.getState() == PlayerStateEnum.DEAD) {
                 _eliminated.add(_players.indexOf(p));
+            }
         }
-        
+
         _events = (ArrayList<Event>) g.getEvents().clone();
-        
+
         _energyPrice = g.getPowerPrice();
     }
 
@@ -121,5 +112,4 @@ public class Turn
     public int getWind() {
         return _wind;
     }
-    
 }

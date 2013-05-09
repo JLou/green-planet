@@ -17,33 +17,28 @@ import org.jfree.data.category.DefaultCategoryDataset;
 
 /**
  * Display the energy repartition across players/building types
+ *
  * @author JLou
  */
-public final class GameEnergyRepartition extends AbstractTurnChart
-{
-    
+public final class GameEnergyRepartition extends AbstractTurnChart {
+
     DefaultCategoryDataset dataset;
-    
-    public GameEnergyRepartition(Turn t)
-    {
+
+    public GameEnergyRepartition(Turn t) {
         super(t);
         createDataset();
         _chart = ChartFactory.createStackedBarChart("Energy Repartition", "Category", "Value",
                 dataset, PlotOrientation.VERTICAL, true, true, false);
     }
-    
-    
+
     @Override
-    protected CategoryDataset createDataset() 
-    {
+    protected CategoryDataset createDataset() {
         dataset = new DefaultCategoryDataset();
 
-        
-        for(PlayerInfo p : _turn.getPlayers())
-        {
+
+        for (PlayerInfo p : _turn.getPlayers()) {
             BuildingValue bc = p.getBuildingsValues();
-            for(BuildingInfo bi : BuildingInfo.getValues())
-            {
+            for (BuildingInfo bi : BuildingInfo.getValues()) {
                 try {
                     dataset.addValue(bc.getBuildingValue(bi.getIndex()), bi.getName(), p.getName());
                 } catch (Exception ex) {

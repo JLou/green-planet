@@ -9,21 +9,18 @@ import java.util.ArrayList;
  *
  * @author JLou
  */
-public class IA 
-{
-    public IA()
-    {
-        
+public class IA {
+
+    public IA() {
     }
-    
-    public Order takeDecision(Game game)
-    {
+
+    public Order takeDecision(Game game) {
         Order order;
         ArrayList l = new ArrayList();
         float cash;
         float energy;
         int nucl = 0, wind = 0, water = 0, sun = 0, charb = 0;
-        
+
         Player us = game.getPlayers().get(0);
         for (Player p : game.getPlayers()) {
             if (p.getName().equals("JLou")) {
@@ -60,7 +57,7 @@ public class IA
         } else {
             order = new Order(0, l);
         }
-        
+
         return order;
     }
 }

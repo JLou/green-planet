@@ -10,34 +10,32 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.Dataset;
 
 /**
- * Graph that displays the eco bonus of the alive players for a specific
- * turn
+ * Graph that displays the eco bonus of the alive players for a specific turn
+ *
  * @author JLou
  */
 public class EcoBonus extends AbstractTurnChart {
 
     DefaultCategoryDataset dataset;
-    
+
     /**
-     * 
+     *
      * @param t Turn to analyse
      */
-    public EcoBonus(Turn t)
-    {
+    public EcoBonus(Turn t) {
         super(t);
         createDataset();
         _chart = ChartFactory.createStackedBarChart("Eco bonus", "Joueur", "Bonus Eco",
                 dataset, PlotOrientation.VERTICAL, true, true, false);
     }
-    
+
     @Override
     protected Dataset createDataset() {
-        
+
         dataset = new DefaultCategoryDataset();
 
-        
-        for(PlayerInfo p : _turn.getAlivePlayers())
-        {
+
+        for (PlayerInfo p : _turn.getAlivePlayers()) {
             try {
                 dataset.addValue(p.getEcoBonus(), "", p.getName());
             } catch (Exception ex) {
@@ -45,7 +43,6 @@ public class EcoBonus extends AbstractTurnChart {
             }
         }
         return dataset;
-        
+
     }
-    
 }
