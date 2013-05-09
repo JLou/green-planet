@@ -16,7 +16,7 @@ import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
 
 /**
- *
+ * Energy repartition according to type of energy
  * @author JLou
  */
 public final class PiePlayerEnergy extends AbstractTurnChart

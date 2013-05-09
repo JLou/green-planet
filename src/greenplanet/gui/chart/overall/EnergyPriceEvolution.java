@@ -13,10 +13,10 @@ import org.jfree.data.xy.DefaultXYDataset;
 import org.jfree.data.xy.XYDataset;
 
 /**
- *
+ * Display the evolution of the energy price
  * @author JLou
  */
-public class EnergyPriceEvolution extends AbstractChart
+public final class EnergyPriceEvolution extends AbstractChart
 {
     
     public EnergyPriceEvolution(GameHistory gh)

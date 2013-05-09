@@ -5,7 +5,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.Dataset;
 
 /**
- *
+ * End game Chart 
  * @author JLou
  */
 public abstract class AbstractChart 

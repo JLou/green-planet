@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package greenplanet.data;
 
 import greenplanet.BuildingInfo;
@@ -10,7 +6,8 @@ import greenplanetclient.Building;
 import greenplanetclient.Player;
 
 /**
- *
+ * Utility class to easily calculate the production of the several type of building
+ * of a specific player
  * @author JLou
  */
 public class BuildingValue extends BuildingArray
@@ -28,18 +25,22 @@ public class BuildingValue extends BuildingArray
     
     /**
      *
-     * @param bi
-     * @return
+     * @param bi The building we want to analyse
+     * @return int the production of the building
      */
     private int computeProduction(BuildingInfo bi)
     {
-        int reliableProd = 100 - bi.getSolarDependency() - bi.getWaterDependency() - bi.getWindDependency();        
+        //Split reliable and dependent prod
+        int reliableProd = 100 - bi.getSolarDependency() 
+                - bi.getWaterDependency() - bi.getWindDependency();        
         int a = bi.getProd() * 
                 (reliableProd + bi.getSolarDependency() * _turn.getSun() / 100
                 + bi.getWaterDependency() * _turn.getWater() / 100
                 + bi.getWindDependency() * _turn.getWind() / 100) / 100;
         return a;
     }
+    
+    
     @Override
     public void computeData() 
     {

@@ -10,7 +10,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.Dataset;
 
 /**
- *
+ * Overall chart displaying information about the whole game
  * @author JLou
  */
 public abstract class AbstractChart 

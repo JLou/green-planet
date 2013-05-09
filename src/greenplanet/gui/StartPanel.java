@@ -11,7 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 /**
- *
+ * Panel displayed to select which type of game we want to play
  * @author JLou
  */
 public class StartPanel extends JPanel

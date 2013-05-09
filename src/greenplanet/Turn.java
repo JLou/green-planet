@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package greenplanet;
 
 import greenplanet.data.PlayerInfo;
@@ -12,7 +8,7 @@ import greenplanetclient.PlayerStateEnum;
 import java.util.ArrayList;
 
 /**
- *
+ * Informations about a game turn
  * @author JLou
  */
 
@@ -32,11 +28,19 @@ public class Turn
     
     private float _energyPrice;
     
+    /**
+     * 
+     * @return list of all the players in this turn
+     */
     public ArrayList<PlayerInfo> getPlayers()
     {
         return _players;
     }
     
+    /**
+     * 
+     * @return list of all the alive players in this turn
+     */
     public ArrayList<PlayerInfo> getAlivePlayers()
     {
         ArrayList<PlayerInfo> alives = new ArrayList<>();
@@ -47,6 +51,11 @@ public class Turn
         return alives;
     }
     
+    /**
+     * 
+     * @param name of the wanted player
+     * @return the playerinfo in this turn
+     */
     public PlayerInfo getPlayer(String name)
     {
         for(PlayerInfo p : _players)
@@ -57,10 +66,19 @@ public class Turn
         return _players.get(_players.size()-1);
     }
     
+    /**
+     * 
+     * @return energy price in this turn
+     */
     public float getEnergyPrice()
     {
         return _energyPrice;
     }
+    
+    /**
+     * Constructor
+     * @param Game
+     */
     public Turn(Game g)
     {
         _players = new ArrayList<>();

@@ -6,7 +6,6 @@ package greenplanet.gui.chart.turn;
 
 import greenplanet.BuildingInfo;
 import greenplanet.Turn;
-import greenplanet.data.BuildingCount;
 import greenplanet.data.BuildingValue;
 import greenplanet.data.PlayerInfo;
 import java.util.logging.Level;
@@ -17,7 +16,7 @@ import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 /**
- *
+ * Display the energy repartition across players/building types
  * @author JLou
  */
 public final class GameEnergyRepartition extends AbstractTurnChart

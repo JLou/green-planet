@@ -1,14 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package greenplanet.data;
 
 import greenplanetclient.Building;
 import greenplanetclient.Player;
 
 /**
- *
+ * Save the amount of building of each type the player has
  * @author JLou
  */
 public class BuildingCount extends BuildingArray
@@ -21,7 +17,7 @@ public class BuildingCount extends BuildingArray
     }
     
     @Override
-    public void computeData()
+    public final void computeData()
     {
         for(Building b : _player.getBuildings())
         {

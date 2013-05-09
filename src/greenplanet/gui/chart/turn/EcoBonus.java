@@ -1,12 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package greenplanet.gui.chart.turn;
 
-import greenplanet.BuildingInfo;
 import greenplanet.Turn;
-import greenplanet.data.BuildingValue;
 import greenplanet.data.PlayerInfo;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,16 +8,20 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.Dataset;
-import org.jfree.data.general.DefaultPieDataset;
 
 /**
- *
+ * Graph that displays the eco bonus of the alive players for a specific
+ * turn
  * @author JLou
  */
 public class EcoBonus extends AbstractTurnChart {
 
     DefaultCategoryDataset dataset;
     
+    /**
+     * 
+     * @param t Turn to analyse
+     */
     public EcoBonus(Turn t)
     {
         super(t);

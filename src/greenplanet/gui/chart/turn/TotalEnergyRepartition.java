@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package greenplanet.gui.chart.turn;
 
 import greenplanet.BuildingInfo;
@@ -14,7 +10,7 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.data.general.DefaultPieDataset;
 
 /**
- *
+ * Repartition of the global energy in the turn
  * @author JLou
  */
 public class TotalEnergyRepartition extends AbstractTurnChart {
@@ -31,7 +27,7 @@ public class TotalEnergyRepartition extends AbstractTurnChart {
     
     
     @Override
-    protected DefaultPieDataset createDataset() 
+    protected final DefaultPieDataset createDataset() 
     {
         DefaultPieDataset result = new DefaultPieDataset();
         

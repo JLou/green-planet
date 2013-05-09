@@ -1,7 +1,6 @@
 package greenplanet.gui;
 
 import greenplanet.GameHistory;
-import greenplanet.Turn;
 import greenplanet.data.PlayerInfo;
 import greenplanet.gui.chart.overall.EnergyPriceEvolution;
 import greenplanet.gui.chart.overall.MoneyEarned;
@@ -12,10 +11,10 @@ import greenplanet.gui.chart.turn.TotalEnergyRepartition;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.DefaultComboBoxModel;
-import org.jfree.chart.ChartPanel;
 
 /**
- *
+ * Chart panel displayed after a game to see visual information about
+ * the game
  * @author JLou
  */
 public class AfterGamePanel extends javax.swing.JPanel {
@@ -30,6 +29,7 @@ public class AfterGamePanel extends javax.swing.JPanel {
 
         _gameHistory = gh;
 
+        //Player combobox
         final DefaultComboBoxModel model = new DefaultComboBoxModel<>();
         model.addElement("Tous");
         for (PlayerInfo pi : gh.getTurn(0).getPlayers()) {
@@ -37,14 +37,19 @@ public class AfterGamePanel extends javax.swing.JPanel {
         }
 
         playerComboBox.setModel(model);
+        
+        //Called on player changed in combobox
         playerComboBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 DefaultComboBoxModel turnModel = new DefaultComboBoxModel();
+                
+                //Selected all players (special #0 option
                 if (playerComboBox.getSelectedIndex() == 0) {
                     for (int i = 0; i < _gameHistory.count(); i++) {
                         turnModel.addElement(i+1);
                     }
+                //Specific player
                 } else {
                     String playerName = model.getSelectedItem().toString();
                     PlayerInfo pi = gh.getTurn(0).getPlayer(playerName);
@@ -57,7 +62,7 @@ public class AfterGamePanel extends javax.swing.JPanel {
                     }
                 }
                 turnCombobox.setModel(turnModel);
-
+                //Called upon modification of the selected turn
                 turnCombobox.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {

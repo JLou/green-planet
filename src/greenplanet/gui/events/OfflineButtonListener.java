@@ -9,7 +9,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 /**
- *
+ * Handle click on the offline game
  * @author JLou
  */
 public class OfflineButtonListener implements MouseListener {

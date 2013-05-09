@@ -1,11 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package greenplanet.gui;
 
 /**
- *
+ * Panel to select the Online game options
  * @author JLou
  */
 public class OnlineOptionsPanel extends javax.swing.JPanel {

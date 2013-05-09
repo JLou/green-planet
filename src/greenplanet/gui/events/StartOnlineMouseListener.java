@@ -9,7 +9,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 /**
- *
+ * Start an online game
  * @author JLou
  */
 public class StartOnlineMouseListener extends MouseAdapter

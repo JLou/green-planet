@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import org.jfree.chart.ChartPanel;
 
 /**
- *
+ * Program main frame
  * @author JLou
  */
 public class MainFrame extends JFrame 

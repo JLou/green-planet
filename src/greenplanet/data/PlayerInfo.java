@@ -5,7 +5,7 @@ import greenplanetclient.Player;
 import greenplanetclient.PlayerStateEnum;
 
 /**
- *
+ * Save the information at a fixed point in time of a player
  * @author JLou
  */
 public class PlayerInfo 
@@ -28,6 +28,11 @@ public class PlayerInfo
     
     private int _ecoBonus;
     
+    /**
+     * 
+     * @param p Player to save
+     * @param t Turn information, used to save meteorological values
+     */
     public PlayerInfo(Player p, Turn t)
     {
         _buildingsCount = new BuildingCount(p);
@@ -40,6 +45,10 @@ public class PlayerInfo
         _isAlive = p.getState() == PlayerStateEnum.ALIVE;
     }
     
+    /**
+     * 
+     * @return Total energy available to the player
+     */
     public int getTotalEnergy() 
     {
         if(_totalEnergy == -1)
@@ -57,38 +66,46 @@ public class PlayerInfo
         return getBuildingsValues().getBuildingValue(buildingType);
     }
     
+    /**
+     * 
+     * @return Player cash
+     */
     public float getCash()
     {
         return _cash;
     }
 
+    /**
+     * 
+     * @return Player name
+     */
     public String getName() {
         return _name;
     }
 
     /**
-     * @return the _buildingsCount
+     * @return the Information about amount of building
      */
     public BuildingCount getBuildingsCount() {
         return _buildingsCount;
     }
 
     /**
-     * @return buildingsValues
+     * @return the informations about values of production of the building
      */
     public BuildingValue getBuildingsValues() {
         return _buildingsValues;
     }
 
     /**
-     * @return the _isAlive
+     * @return whether the player is alive
      */
     public boolean isAlive() {
         return _isAlive;
     }
 
     /**
-     * @return the _ecoBonus
+     * @return the player eco bonus
      */
     public int getEcoBonus() {
         return _ecoBonus;
