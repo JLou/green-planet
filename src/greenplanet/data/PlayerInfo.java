@@ -26,6 +26,8 @@ public class PlayerInfo
     
     private float _cash;
     
+    private int _ecoBonus;
+    
     public PlayerInfo(Player p, Turn t)
     {
         _buildingsCount = new BuildingCount(p);
@@ -33,6 +35,7 @@ public class PlayerInfo
         
         _cash = p.getCash();
         _name = p.getName();
+        _ecoBonus = p.getPollution();
         _turn = t;
         _isAlive = p.getState() == PlayerStateEnum.ALIVE;
     }
@@ -82,6 +85,13 @@ public class PlayerInfo
      */
     public boolean isAlive() {
         return _isAlive;
+    }
+
+    /**
+     * @return the _ecoBonus
+     */
+    public int getEcoBonus() {
+        return _ecoBonus;
     }
     
 }

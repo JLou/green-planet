@@ -39,7 +39,12 @@ public class Turn
     
     public ArrayList<PlayerInfo> getAlivePlayers()
     {
-        return _players;
+        ArrayList<PlayerInfo> alives = new ArrayList<>();
+        for (int i = 0; i < _players.size(); i++) {
+            if(_players.get(i).isAlive())
+                alives.add(_players.get(i));
+        }
+        return alives;
     }
     
     public PlayerInfo getPlayer(String name)

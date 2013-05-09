@@ -5,7 +5,6 @@
 package greenplanet.gui.chart.overall;
 
 import greenplanet.GameHistory;
-import greenplanet.Turn;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.Dataset;

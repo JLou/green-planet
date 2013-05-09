@@ -5,8 +5,10 @@ import greenplanet.Turn;
 import greenplanet.data.PlayerInfo;
 import greenplanet.gui.chart.overall.EnergyPriceEvolution;
 import greenplanet.gui.chart.overall.MoneyEarned;
+import greenplanet.gui.chart.turn.EcoBonus;
 import greenplanet.gui.chart.turn.GameEnergyRepartition;
 import greenplanet.gui.chart.turn.PiePlayerEnergy;
+import greenplanet.gui.chart.turn.TotalEnergyRepartition;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.DefaultComboBoxModel;
@@ -88,6 +90,11 @@ public class AfterGamePanel extends javax.swing.JPanel {
         if (playerComboBox.getSelectedIndex() == 0) {
             GameEnergyRepartition chart = new GameEnergyRepartition(_gameHistory.getTurn(turn));
             TurnTabbedPanel.add("Energy Repartition", chart.getPanel());
+            TotalEnergyRepartition ter = new TotalEnergyRepartition(_gameHistory.getTurn(turn));
+            TurnTabbedPanel.add("Total Energy Repartition", ter.getPanel());
+            EcoBonus eco = new EcoBonus(_gameHistory.getTurn(turn));
+            TurnTabbedPanel.add("Eco bonus", eco.getPanel());
+            
         } else {
             String playerName = playerComboBox.getSelectedItem().toString();
 
